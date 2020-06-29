@@ -62,7 +62,7 @@ class _PledgeScreenState extends State<PledgeScreen>
   void initState() {
     super.initState();
 
-    offset = Tween<Offset>(begin: Offset(0,-1), end: Offset(0,0))
+    offset = Tween<Offset>(begin: Offset(0, -1), end: Offset(0, 0))
         .animate(widget.animationController);
 
     widget.animationController.forward();
@@ -88,19 +88,54 @@ class _PledgeScreenState extends State<PledgeScreen>
       position: offset,
       child: Column(
         children: <Widget>[
-          const SizedBox(
+          SizedBox(
             child: DrawerHeader(
               margin: EdgeInsets.all(0),
+              padding: EdgeInsets.only(bottom: 0, top: 20),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
               child: Center(
-                child: Text(
-                  'My Pledges',
-                  textScaleFactor: 1.25,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        'My Pledges',
+                        textScaleFactor: 1.25,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 75),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(150),
+                            bottomLeft: Radius.circular(150),
+                          ),
+                          gradient: RadialGradient(
+                            radius: 6,
+                            colors: [
+                              Colors.white,
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                        child: Container(
+                            child: Center(
+                          child: Text(
+                            'Do these things incrementally\nfor optimal results',
+                            textAlign: TextAlign.center,
+                          ),
+                        )),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -223,7 +258,7 @@ class _PledgeScreenState extends State<PledgeScreen>
                 _BoolPledge(
                   (bool val) => setState(() => _localBuyState = val),
                   _localBuyState,
-                  'I Will Buy Products That Are Sourced Locally And Not Become A Mindless Consumer Of Cheaply Made Products Imported From Distant Nations.',
+                  'I Will Buy Products That Are Sourced Locally And Not Become A Consumer Of Cheaply Made Imported Products.',
                 ),
                 _ValPledge(
                   'I Drive My Car For',
@@ -288,95 +323,166 @@ class _BoolPledge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        Container(
-          height: MediaQuery.of(context).size.height * .4,
-          padding: _pagePadding,
-          child: Text(
-            text,
-            textAlign: TextAlign.justify,
-            textScaleFactor: 1.75,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 100),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('No'),
-              SizedBox(
-                width: 150,
-                height: 50,
-                child: Switch(
-                  value: state,
-                  onChanged: func,
-                ),
+    return _PageWrapper(
+      SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * .4,
+              padding: _pagePadding,
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                textScaleFactor: 1.75,
               ),
-              const Text('Yes'),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 100),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('No'),
+                  SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: Switch(
+                      value: state,
+                      onChanged: func,
+                    ),
+                  ),
+                  const Text('Yes'),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
 
 class _ValPledge extends StatelessWidget {
+  final double padding = 20;
   final String text1, text2, text3;
 
   _ValPledge(this.text1, this.text2, this.text3);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SizedBox(height: 10),
-          Text(
-            text1,
-            textScaleFactor: 1.5,
-          ),
-          const SizedBox(
-            child: TextField(
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  hintText: '0',
-                  hintStyle:
-                      TextStyle(fontWeight: FontWeight.w800, fontSize: 22)),
+    return _PageWrapper(
+      SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            SizedBox(height: 10),
+            Text(
+              text1,
+              textScaleFactor: 1.5,
             ),
-            width: 100,
-          ),
-          Text(
-            text2,
-            textScaleFactor: 1.5,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            child: TextField(
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                  hintText: '0',
-                  hintStyle:
-                      TextStyle(fontWeight: FontWeight.w800, fontSize: 22)),
+            SizedBox(
+              height: padding,
             ),
-            width: 100,
-          ),
-          Text(
-            text3,
-            textScaleFactor: 1.5,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 75,
-          )
-        ],
+            const SizedBox(
+              child: TextField(
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: '0',
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+              width: 100,
+            ),
+            SizedBox(
+              height: padding,
+            ),
+            Text(
+              text2,
+              textScaleFactor: 1.5,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: padding,
+            ),
+            const SizedBox(
+              child: TextField(
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: '0',
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+              width: 100,
+            ),
+            SizedBox(
+              height: padding,
+            ),
+            Text(
+              text3,
+              textScaleFactor: 1.5,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 100,
+            ),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _PageWrapper extends StatelessWidget {
+  final Widget child;
+  _PageWrapper(this.child);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Container(
+          height: double.infinity,
+          child: Icon(Icons.chevron_left),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.grey[600],
+                Colors.grey[300],
+                Colors.grey[100],
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
+        Expanded(
+          child: child,
+        ),
+        Container(
+          height: double.infinity,
+          child: Icon(Icons.chevron_right),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.grey[100],
+                Colors.grey[300],
+                Colors.grey[600],
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

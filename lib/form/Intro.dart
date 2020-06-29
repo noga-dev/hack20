@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
           backgroundColor: Color(0xFF8185E2),
-        //backgroundColor: Color(0xffb74093),
+          //backgroundColor: Color(0xffb74093),
           body: Center(
             child: Column(
               children: <Widget>[
@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                         //   size: 50.0,
                         // ),
                         child: new Image.asset(
-                          'assets/images/earth.png',
+                          'assets/images/gaia.png',
                           height: 100.0,
                           fit: BoxFit.cover,
                         ),
@@ -112,17 +112,19 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   height: 100.0,
                 ),
                 DelayedAnimation(
-                child: GestureDetector(
-                  onTapDown: _onTapDown,
-                  onTapUp: _onTapUp,
-                  child: Transform.scale(
-                    scale: _scale,
-                    child: _animatedButtonUI,
+                  child: GestureDetector(
+                    onTapDown: _onTapDown,
+                    onTapUp: _onTapUp,
+                    child: Transform.scale(
+                      scale: _scale,
+                      child: _animatedButtonUI,
+                    ),
                   ),
+                  delay: delayedAmount + 4000,
                 ),
-                delay: delayedAmount + 4000,
-              ),
-              SizedBox(height: 50.0,),
+                SizedBox(
+                  height: 50.0,
+                ),
                 DelayedAnimation(
                   child: Text(
                     "".toUpperCase(),
@@ -170,25 +172,27 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         //     ),
         //   ),
         // ),
-          child: Column(
-              children: <Widget>[
-                MaterialButton(
-                  child: Text('Pledge',
-                  style: TextStyle(
+        child: Column(
+          children: <Widget>[
+            MaterialButton(
+              child: Text(
+                'Pledge',
+                style: TextStyle(
                   fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF8185E2),
-            ),),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FitnessAppHomeScreen()),
-                    );
-                  },
-                  
-                )
-              ],
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF8185E2),
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FitnessAppHomeScreen()),
+                );
+              },
+            )
+          ],
+        ),
       );
 //Home
   void _onTapDown(TapDownDetails details) {

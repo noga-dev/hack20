@@ -94,21 +94,22 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                     repeatPauseDuration: Duration(seconds: 2),
                     startDelay: Duration(seconds: 1),
                     child: Material(
-                        elevation: 8.0,
-                        shape: CircleBorder(),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey[100],
-                          // child: FlutterLogo(
-                          //   size: 50.0,
-                          // ),
-                          child: new Image.asset(
-                            //'assets/images/earth.png',
-                            'assets/fitness_app/earth.png',
-                            height: 100.0,
-                            fit: BoxFit.cover,
-                          ),
-                          radius: 50.0,
-                        )),
+                      elevation: 8.0,
+                      shape: CircleBorder(),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey[100],
+                        // child: FlutterLogo(
+                        //   size: 50.0,
+                        // ),
+                        child: Image.asset(
+                          //'assets/images/earth.png',
+                          'assets/fitness_app/gaia.png',
+                          fit: BoxFit.none,
+                          scale: 4.7,
+                        ),
+                        radius: 50.0,
+                      ),
+                    ),
                   ),
                   DelayedAnimation(
                     child: Text(
@@ -119,6 +120,9 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                           color: color),
                     ),
                     delay: delayedAmount + 1000,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   DelayedAnimation(
                     child: Text(

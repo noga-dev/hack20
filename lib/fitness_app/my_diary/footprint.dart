@@ -19,6 +19,7 @@ class _Footprint extends State<Footprint> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'welcome',
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(
           children: [

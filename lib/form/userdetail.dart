@@ -60,7 +60,7 @@ class _UserDetailState extends State<UserDetail> {
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     child: new Text(
-                      "Fillup",
+                      "Your details",
                       style: new TextStyle(
                         color: Colors.white,
                         fontSize: 40.0,
@@ -76,6 +76,9 @@ class _UserDetailState extends State<UserDetail> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   new TextFormField(
+                    textInputAction: TextInputAction.next,
+                    autofocus: true,
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: new InputDecoration(
                       labelText: "Your Name",
                       labelStyle: new TextStyle(
@@ -93,8 +96,11 @@ class _UserDetailState extends State<UserDetail> {
                     controller: _nameController,
                   ),
                   new TextFormField(
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: new InputDecoration(
                       labelText: "What's Your height?",
+                      hintText: 'cm',
                       labelStyle: new TextStyle(
                         color: Colors.white,
                       ),
@@ -110,8 +116,11 @@ class _UserDetailState extends State<UserDetail> {
                     controller: _hightController,
                   ),
                   new TextFormField(
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: new InputDecoration(
-                      labelText: "How many calories do you eat?",
+                      labelText: "How many calories do you consume daily?",
+                      hintText: 'kCal',
                       labelStyle: new TextStyle(
                         color: Colors.white,
                       ),
@@ -119,7 +128,7 @@ class _UserDetailState extends State<UserDetail> {
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your eaten calories';
+                        return 'Please enter your daily consumed calories';
                       }
                       return null;
                     },
@@ -127,8 +136,11 @@ class _UserDetailState extends State<UserDetail> {
                     controller: _eatController,
                   ),
                   new TextFormField(
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: new InputDecoration(
-                      labelText: "How many calories do you burned?",
+                      labelText: "How many calories do you burn daily?",
+                      hintText: 'kCal',
                       labelStyle: new TextStyle(
                         color: Colors.white,
                       ),
@@ -137,7 +149,7 @@ class _UserDetailState extends State<UserDetail> {
 
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your burned calories';
+                        return 'Please enter your daily burned calories';
                       }
                       return null;
                     },
@@ -146,8 +158,11 @@ class _UserDetailState extends State<UserDetail> {
                     //onChanged: validateEmail,
                   ),
                   new TextFormField(
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
                     decoration: new InputDecoration(
                       labelText: "Your weight",
+                      hintText: 'kg',
                       labelStyle: new TextStyle(
                         color: Colors.white,
                       ),
@@ -165,8 +180,11 @@ class _UserDetailState extends State<UserDetail> {
                     //onChanged: validateEmail,
                   ),
                   new TextFormField(
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
                     decoration: new InputDecoration(
-                      labelText: "How many ml water you drink? ",
+                      labelText: "How much water do you drink daily?",
+                      hintText: 'mL',
                       labelStyle: new TextStyle(
                         color: Colors.white,
                       ),
@@ -175,7 +193,7 @@ class _UserDetailState extends State<UserDetail> {
 
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter ml water you drink';
+                        return 'Please enter how much water you drink per day';
                       }
                       return null;
                     },

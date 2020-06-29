@@ -76,7 +76,7 @@ class RunningView extends StatelessWidget {
                                             fontFamily:
                                                 FintnessAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 14,
+                                            fontSize: 16,
                                             letterSpacing: 0.0,
                                             color:
                                                 FintnessAppTheme.nearlyDarkBlue,
@@ -92,16 +92,19 @@ class RunningView extends StatelessWidget {
                                       top: 4,
                                       right: 16,
                                     ),
-                                    child: Text(
-                                      "Keep it up\nand stick to your plan!",
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontFamily: FintnessAppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10,
-                                        letterSpacing: 0.0,
-                                        color: FintnessAppTheme.grey
-                                            .withOpacity(0.5),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Text(
+                                        "Keep it up and stick to your plan!",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontFamily: FintnessAppTheme.fontName,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 11,
+                                          letterSpacing: 0.0,
+                                          color: FintnessAppTheme.grey
+                                              .withOpacity(0.7),
+                                        ),
                                       ),
                                     ),
                                   ),

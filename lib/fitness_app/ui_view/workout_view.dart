@@ -26,7 +26,7 @@ class WorkoutView extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
                     //FintnessAppTheme.nearlyDarkBlue,
-                    FintnessAppTheme.nearlyWhite,
+                    FintnessAppTheme.dark_grey,
                     HexColor("#006400")
                   ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                   borderRadius: BorderRadius.only(
@@ -36,7 +36,7 @@ class WorkoutView extends StatelessWidget {
                       topRight: Radius.circular(68.0)),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                        color: FintnessAppTheme.grey.withOpacity(0.6),
+                        color: FintnessAppTheme.grey.withOpacity(0.7),
                         offset: Offset(1.1, 1.1),
                         blurRadius: 10.0),
                   ],
@@ -48,7 +48,7 @@ class WorkoutView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Take pladge',
+                        'Pledge to',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontFamily: FintnessAppTheme.fontName,
@@ -61,7 +61,7 @@ class WorkoutView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: Text(
-                          'You daily work for impove our world and your self',
+                          'Do your daily workout to impove yourself as well as our world',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontFamily: FintnessAppTheme.fontName,
@@ -108,7 +108,8 @@ class WorkoutView extends StatelessWidget {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                color: FintnessAppTheme.nearlyWhite,
+                                color: FintnessAppTheme.nearlyWhite
+                                    .withOpacity(.9),
                                 shape: BoxShape.circle,
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(

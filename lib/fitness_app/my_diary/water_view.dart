@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class WaterView extends StatefulWidget {
   const WaterView(
       {Key key,
-        this.mainScreenAnimationController,
-        this.mainScreenAnimation,
-        this.water})
+      this.mainScreenAnimationController,
+      this.mainScreenAnimation,
+      this.water})
       : super(key: key);
 
   final AnimationController mainScreenAnimationController;
@@ -80,7 +80,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.w600,
                                           fontSize: 32,
                                           color:
-                                          FintnessAppTheme.nearlyDarkBlue,
+                                              FintnessAppTheme.nearlyDarkBlue,
                                         ),
                                       ),
                                     ),
@@ -96,7 +96,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                           fontSize: 18,
                                           letterSpacing: -0.2,
                                           color:
-                                          FintnessAppTheme.nearlyDarkBlue,
+                                              FintnessAppTheme.nearlyDarkBlue,
                                         ),
                                       ),
                                     ),
@@ -106,7 +106,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.only(
                                       left: 4, top: 2, bottom: 14),
                                   child: Text(
-                                    'of daily goal 3.5L',
+                                    'of 3.5L daily goal',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FintnessAppTheme.fontName,
@@ -140,7 +140,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Padding(
                                         padding: const EdgeInsets.only(left: 4),
@@ -153,13 +153,13 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                       ),
                                       Padding(
                                         padding:
-                                        const EdgeInsets.only(left: 4.0),
+                                            const EdgeInsets.only(left: 4.0),
                                         child: Text(
                                           'Last drink 8:26 AM',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontFamily:
-                                            FintnessAppTheme.fontName,
+                                                FintnessAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 14,
                                             letterSpacing: 0.0,
@@ -174,9 +174,9 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                     padding: const EdgeInsets.only(top: 4),
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                       children: <Widget>[
                                         SizedBox(
                                           width: 24,
@@ -190,7 +190,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                               fontFamily:
-                                              FintnessAppTheme.fontName,
+                                                  FintnessAppTheme.fontName,
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12,
                                               letterSpacing: 0.0,
@@ -263,7 +263,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                       ),
                       Padding(
                         padding:
-                        const EdgeInsets.only(left: 16, right: 8, top: 16),
+                            const EdgeInsets.only(left: 16, right: 8, top: 16),
                         child: Container(
                           width: 60,
                           height: 160,
