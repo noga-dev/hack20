@@ -41,8 +41,10 @@ import 'package:best_flutter_ui_templates/form/userdetail.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((_) => runApp(MyApp()));
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]).then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -65,8 +67,8 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       lowerBound: 0.0,
       upperBound: 0.1,
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
     super.initState();
   }
 
@@ -81,180 +83,175 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
           //backgroundColor: Color(0xffb74093),
 //        backgroundColor: Colors.deepPurpleAccent
           body: Center(
-            child: Column(
-              children: <Widget>[
-                AvatarGlow(
-                  endRadius: 90,
-                  duration: Duration(seconds: 2),
-                  glowColor: Colors.white24,
-                  repeat: true,
-                  repeatPauseDuration: Duration(seconds: 2),
-                  startDelay: Duration(seconds: 1),
-                  child: Material(
-                      elevation: 8.0,
-                      shape: CircleBorder(),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey[100],
-                        // child: FlutterLogo(
-                        //   size: 50.0,
-                        // ),
-                        child: new Image.asset(
-                          //'assets/images/earth.png',
-                          'assets/fitness_app/earth.png',
-                          height: 100.0,
-                          fit: BoxFit.cover,
-                        ),
-                        radius: 50.0,
-                      )),
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "Hi There",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35.0,
-                        color: color),
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  AvatarGlow(
+                    endRadius: 90,
+                    duration: Duration(seconds: 2),
+                    glowColor: Colors.white24,
+                    repeat: true,
+                    repeatPauseDuration: Duration(seconds: 2),
+                    startDelay: Duration(seconds: 1),
+                    child: Material(
+                        elevation: 8.0,
+                        shape: CircleBorder(),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey[100],
+                          // child: FlutterLogo(
+                          //   size: 50.0,
+                          // ),
+                          child: new Image.asset(
+                            //'assets/images/earth.png',
+                            'assets/fitness_app/earth.png',
+                            height: 100.0,
+                            fit: BoxFit.cover,
+                          ),
+                          radius: 50.0,
+                        )),
                   ),
-                  delay: delayedAmount + 1000,
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "I'm Earth",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30.0,
-                        color: color),
+                  DelayedAnimation(
+                    child: Text(
+                      "Hi There",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35.0,
+                          color: color),
+                    ),
+                    delay: delayedAmount + 1000,
                   ),
-                  delay: delayedAmount + 2000,
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "You wish to SAVE me",
-                    style: TextStyle(fontSize: 26.0, color: color),
+                  DelayedAnimation(
+                    child: Text(
+                      "I'm Earth",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30.0,
+                          color: color),
+                    ),
+                    delay: delayedAmount + 2000,
                   ),
-                  delay: delayedAmount + 3000,
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "Take",
-                    style: TextStyle(fontSize: 20.0, color: color),
+                  SizedBox(
+                    height: 50.0,
                   ),
-                  delay: delayedAmount + 3000,
-                ),
-                SizedBox(
-                  height: 100.0,
-                ),
-                Builder(
-                    builder: (context) =>  DelayedAnimation(
-                      child: GestureDetector(
-                        onTapDown: _onTapDown,
-                        onTapUp: _onTapUp,
-                        onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-                            return UserDetail();
-                          }));
-                        },
-                        child: Transform.scale(
-                          scale: _scale,
-                          child: Container(
-                            height: 60,
-                            width: 270,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100.0),
-                              color: Colors.white,
-                            ),
-                            // child: Center(
-                            //   child: Text(
-                            //     'Pledge',
-                            //     style: TextStyle(
-                            //       fontSize: 20.0,
-                            //       fontWeight: FontWeight.bold,
-                            //       color: Color(0xFF8185E2),
-                            //     ),
-                            //   ),
-                            // ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                MaterialButton(
-                                  child:Center(child: Text(
-                                    'Pledge',
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF8185E2),
-                                    ),
-                                  )),
-                                  // onPressed: () {
-                                  //   Navigator.push(
-                                  //                              //     context,
-                                  //                              //     MaterialPageRoute(builder: (context) => FitnessAppHomeScreen()),
-                                  //                              //   );
-                                  // },/*{
-                                  //                          Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetail()));
-                                  //                            },*/
+                  DelayedAnimation(
+                    child: Text(
+                      "Would you like to help me?",
+                      style: TextStyle(fontSize: 26.0, color: color),
+                    ),
+                    delay: delayedAmount + 3000,
+                  ),
+                  SizedBox(
+                    height: 75.0,
+                  ),
+                  Builder(
+                      builder: (context) => DelayedAnimation(
+                            child: GestureDetector(
+                              onTapDown: _onTapDown,
+                              onTapCancel: _onTapCancel,
+                              onTapUp: _onTapUp,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute<Null>(
+                                        builder: (BuildContext context) {
+                                  return UserDetail();
+                                }));
+                              },
+                              child: Transform.scale(
+                                scale: _scale,
+                                child: Container(
+                                  height: 60,
+                                  width: 270,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    color: Colors.white,
+                                  ),
+                                  // child: Center(
+                                  //   child: Text(
+                                  //     'Pledge',
+                                  //     style: TextStyle(
+                                  //       fontSize: 20.0,
+                                  //       fontWeight: FontWeight.bold,
+                                  //       color: Color(0xFF8185E2),
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      //ignore: missing_required_param
+                                      MaterialButton(
+                                        child: Center(
+                                            child: Text(
+                                          'Pledge',
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF8185E2),
+                                          ),
+                                        )),
+                                        // onPressed: () {
+                                        //   Navigator.push(
+                                        //                              //     context,
+                                        //                              //     MaterialPageRoute(builder: (context) => FitnessAppHomeScreen()),
+                                        //                              //   );
+                                        // },/*{
+                                        //                          Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetail()));
+                                        //                            },*/
 //                              onPressed: () {
 //                                                          Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetail()));
 //                              },
-                                )
-                              ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                      delay: delayedAmount + 4000,
-                    )),
-                SizedBox(
-                  height: 50.0,
-                ),
-                DelayedAnimation(
-                  child: Text(
-                    "".toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: color),
+                            delay: delayedAmount + 4000,
+                          )),
+                  SizedBox(
+                    height: 50.0,
                   ),
-                  delay: delayedAmount + 5000,
-                ),
-              ],
+                  DelayedAnimation(
+                    child: Text(
+                      "".toUpperCase(),
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: color),
+                    ),
+                    delay: delayedAmount + 5000,
+                  ),
+                ],
+              ),
             ),
           )
-        //  Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-        //     Text('Tap on the Below Button',style: TextStyle(color: Colors.grey[400],fontSize: 20.0),),
-        //     SizedBox(
-        //       height: 20.0,
-        //     ),
-        //      Center(
+          //  Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: <Widget>[
+          //     Text('Tap on the Below Button',style: TextStyle(color: Colors.grey[400],fontSize: 20.0),),
+          //     SizedBox(
+          //       height: 20.0,
+          //     ),
+          //      Center(
 
-        //   ),
-        //   ],
+          //   ),
+          //   ],
 
-        // ),
-      ),
+          // ),
+          ),
     );
   }
 
 //  Widget get _animatedButtonUI =>
 
 //Home
-  void _onTapDown(TapDownDetails details) {
-    _controller.forward();
-  }
+  void _onTapDown(TapDownDetails details) => _controller.forward();
 
-  void _onTapUp(TapUpDetails details) {
-    _controller.reverse();
-  }
+  void _onTapCancel() => _controller.reverse();
+
+  void _onTapUp(TapUpDetails details) => _controller.reverse();
 }
 
 class HexColor extends Color {

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../fitness_app/fitness_app_home_screen.dart';
-import '../model/homelist.dart';
 
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
@@ -16,11 +15,6 @@ bool showNameError = false;
 bool showEmailError = false;
 bool showPasswordError = false;
 
-String _eat = "";
-String _burn = "";
-String _weight = "";
-String _name = "";
-String _height = "";
 
 final _eatController = new TextEditingController();
 final _burnController = new TextEditingController();

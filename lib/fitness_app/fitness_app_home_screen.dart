@@ -90,22 +90,23 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 setState(() {
                   tabBody =
                       MyDiaryScreen(animationController: animationController);
-                   //Pladge(animationController: animationController);
+                  //Pladge(animationController: animationController);
                 });
               });
-            } if (index == 1) {
+            }
+            if (index == 1) {
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
                   tabBody =
-                    //  MyDiaryScreen(animationController: animationController);
-                   //Pladge(animationController: animationController);
-                   TrainingScreen(animationController: animationController);
+                      //  MyDiaryScreen(animationController: animationController);
+                      //Pladge(animationController: animationController);
+                      TrainingScreen(animationController: animationController);
                 });
               });
-            }else if (index == 2) {
+            } else if (index == 2) {
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
@@ -113,19 +114,19 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
                 setState(() {
                   tabBody =
                       //PledgeScreen(animationController: animationController);
-                      PledgeScreen(animationController: animationController);
+                      PledgeScreen(
+                    animationController: animationController,
+                  );
                 });
               });
-            }else if (index == 3) {
+            } else if (index == 3) {
               animationController.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      Footprint(animationController: animationController);
-                      //Demo(animationController: animationController);
-                      
+                  tabBody = Footprint(animationController: animationController);
+                  //Demo(animationController: animationController);
                 });
               });
             }

@@ -143,13 +143,13 @@ class _BottomBarViewState extends State<BottomBarView>
                       // alignment: Alignment.center,s
                       decoration: BoxDecoration(
                         color: FintnessAppTheme.nearlyDarkBlue,
-                        gradient: LinearGradient(
-                            colors: [
-                              FintnessAppTheme.white,
-                              HexColor('#6A88E5'),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
+                        // gradient: LinearGradient(
+                        //     colors: [
+                        //       FintnessAppTheme.white,
+                        //       HexColor('#6A88E5'),
+                        //     ],
+                        //     begin: Alignment.topLeft,
+                        //     end: Alignment.bottomRight),
                         shape: BoxShape.circle,
                         boxShadow: <BoxShadow>[
                           BoxShadow(
@@ -159,24 +159,33 @@ class _BottomBarViewState extends State<BottomBarView>
                               blurRadius: 16.0),
                         ],
                       ),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          splashColor: Colors.white.withOpacity(0.1),
-                          highlightColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          onTap: () {
-                            widget.addClick();
-                          },
-                          // child: Icon(
-                          //   Icons.add,
-                          //   color: FintnessAppTheme.nearlyBlack,
-                          //   size: 32,
-                          // ),
-                          child: Image.asset(
-                                                      "assets/fitness_app/GrowEarth.png"),
+                      child: Tooltip(
+                        message: 'Placeholder',
+                        child: CircleAvatar(
+                          child: Icon(Icons.home),
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.white,
                         ),
                       ),
+                      // child: Material(
+                      //   color: Colors.black,
+                      //   child: InkWell(
+                      //     splashColor: Colors.white.withOpacity(0.1),
+                      //     highlightColor: Colors.transparent,
+                      //     focusColor: Colors.transparent,
+                      //     onTap: () {
+                      //       widget.addClick();
+                      //     },
+                      //     // child: Icon(
+                      //     //   Icons.add,
+                      //     //   color: FintnessAppTheme.nearlyBlack,
+                      //     //   size: 32,
+                      //     // ),
+                      //     child: Image.asset(
+                      //       "assets/fitness_app/GrowEarth.png",
+                      //     ),
+                      //   ),
+                      // ),
                     ),
                   ),
                 ),

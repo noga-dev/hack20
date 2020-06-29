@@ -137,15 +137,7 @@ class AreaView extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   splashColor: FintnessAppTheme.nearlyDarkBlue.withOpacity(0.2),
                   onTap: () {},
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 16, left: 16, right: 16),
-                        child: Image.asset(imagepath),
-                      ),
-                    ],
-                  ),
+                  child: Image.asset(imagepath, fit: BoxFit.fill),
                 ),
               ),
             ),

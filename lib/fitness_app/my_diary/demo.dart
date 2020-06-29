@@ -1,7 +1,4 @@
-import 'package:best_flutter_ui_templates/fitness_app/ui_view/area_list_view.dart';
-import 'package:best_flutter_ui_templates/fitness_app/ui_view/running_view.dart';
 import 'package:best_flutter_ui_templates/fitness_app/ui_view/title_view.dart';
-import 'package:best_flutter_ui_templates/fitness_app/ui_view/workout_view.dart';
 import 'package:flutter/material.dart';
 
 import '../fintness_app_theme.dart';
@@ -13,8 +10,8 @@ class Demo extends StatefulWidget {
   @override
   _Demo createState() => _Demo();
 }
-class _Demo extends State<Demo>
-    with TickerProviderStateMixin {
+
+class _Demo extends State<Demo> with TickerProviderStateMixin {
   Animation<double> topBarAnimation;
 
   List<Widget> listViews = <Widget>[];
@@ -67,7 +64,7 @@ class _Demo extends State<Demo>
                 Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
       ),
-    );    
+    );
   }
 
   Future<bool> getData() async {
@@ -94,9 +91,7 @@ class _Demo extends State<Demo>
     );
   }
 
-  Widget getMainListViewUI() {
-    
-  }
+  Widget getMainListViewUI() => Container();
 
   Widget getAppBarUI() {
     return Column(
@@ -228,5 +223,3 @@ class _Demo extends State<Demo>
     );
   }
 }
-
-

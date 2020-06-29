@@ -29,8 +29,6 @@
 //    }
 // }
 
-
-
 import 'package:flutter/material.dart';
 
 const Duration _pageAnimDuration = Duration(milliseconds: 500);
@@ -46,504 +44,339 @@ class PledgeScreen extends StatefulWidget {
   final AnimationController animationController;
   @override
   _PledgeScreenState createState() => _PledgeScreenState();
-  
 }
 
-class _PledgeScreenState extends State<PledgeScreen> with TickerProviderStateMixin{
+class _PledgeScreenState extends State<PledgeScreen>
+    with TickerProviderStateMixin {
   final PageController _pageController = PageController();
-  Animation<double> topBarAnimation;
-  int _currentPageIndex;
-  bool _localBuyState = true;
+  Animation<Offset> offset;
+  int _currentPageIndex = 0;
+  bool _localBuyState = false;
+  bool _localSourceState = false;
+  bool _localWasteState = false;
+  bool _localTempState = false;
+  bool _localDryerState = false;
+  bool _localGreenState = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    offset = Tween<Offset>(begin: Offset(0,-1), end: Offset(0,0))
+        .animate(widget.animationController);
+
+    widget.animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    widget.animationController.reverse();
+    super.dispose();
+  }
+
+  void _goToPage(int pageIdx) => _pageController
+      .animateToPage(
+        pageIdx,
+        duration: _pageAnimDuration,
+        curve: _pageCurve,
+      )
+      .then((value) => setState(() => null));
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: offset,
+      child: Column(
+        children: <Widget>[
+          const SizedBox(
+            child: DrawerHeader(
+              margin: EdgeInsets.all(0),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Center(
+                child: Text(
+                  'My Pledges',
+                  textScaleFactor: 1.25,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 20,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.fastfood),
+                  onPressed: () => _goToPage(0),
+                  color: _currentPageIndex == 0
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 0
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.directions_car),
+                  onPressed: () => _goToPage(1),
+                  color: _currentPageIndex == 1
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 1
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.airplanemode_active),
+                  onPressed: () => _goToPage(2),
+                  color: _currentPageIndex == 2
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 2
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.local_car_wash),
+                  onPressed: () => _goToPage(3),
+                  color: _currentPageIndex == 3
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 3
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.restaurant),
+                  onPressed: () => _goToPage(4),
+                  color: _currentPageIndex == 4
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 4
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.shopping_cart),
+                  onPressed: () => _goToPage(5),
+                  color: _currentPageIndex == 5
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 5
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.restore_from_trash),
+                  onPressed: () => _goToPage(6),
+                  color: _currentPageIndex == 6
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 6
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.ac_unit),
+                  onPressed: () => _goToPage(7),
+                  color: _currentPageIndex == 7
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 7
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.developer_board),
+                  onPressed: () => _goToPage(8),
+                  color: _currentPageIndex == 8
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 8
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.battery_charging_full),
+                  onPressed: () => _goToPage(9),
+                  color: _currentPageIndex == 9
+                      ? _activePageIconColor
+                      : _inactivePageIconColor,
+                  iconSize: _currentPageIndex == 9
+                      ? _activePageIconSize
+                      : _inactivePageIconSize,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (int newPageIndex) =>
+                  setState(() => _currentPageIndex = newPageIndex),
+              children: <Widget>[
+                _BoolPledge(
+                  (bool val) => setState(() => _localBuyState = val),
+                  _localBuyState,
+                  'I Will Buy Products That Are Sourced Locally And Not Become A Mindless Consumer Of Cheaply Made Products Imported From Distant Nations.',
+                ),
+                _ValPledge(
+                  'I Drive My Car For',
+                  'KMs Weekly And I Will Reduce My Car Usage To',
+                  'KMs Per Week.',
+                ),
+                _ValPledge(
+                  'I Fly For A Total Of',
+                  'Hours Annually And I Want To Reduce My Flying Hours To',
+                  'Hours.',
+                ),
+                _ValPledge(
+                  'I  Carpool For A Total Of',
+                  'KMs Every Week And I Will Increase My Carpool For A Total Of',
+                  'KMs Every Week.',
+                ),
+                _ValPledge(
+                  'I Eat',
+                  'Non-vegetarian Meals Every Week And I Want To Reduce To',
+                  'Meals.',
+                ),
+                _BoolPledge(
+                  (bool val) => setState(() => _localSourceState = val),
+                  _localSourceState,
+                  'I Will Source My Food From Local Sources As Much As Possible.',
+                ),
+                _BoolPledge(
+                  (bool val) => setState(() => _localWasteState = val),
+                  _localWasteState,
+                  'I Want To Reduce My Food Waste As Much As Possible And Want To Compost Whatever I Waste.',
+                ),
+                _BoolPledge(
+                  (bool val) => setState(() => _localTempState = val),
+                  _localTempState,
+                  'I Will Set My Heating Temperatures At 18C And My AC Temperature At 24C.',
+                ),
+                _BoolPledge(
+                  (bool val) => setState(() => _localDryerState = val),
+                  _localDryerState,
+                  'I Want To Stop Using A Dryer And Hang-dry My Clothes.',
+                ),
+                _BoolPledge(
+                  (bool val) => setState(() => _localGreenState = val),
+                  _localGreenState,
+                  'I Will Move To Green Energy For My Household Use, As Much As Possible (Solar & Other Renewable Energy Sources).',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BoolPledge extends StatelessWidget {
+  final Function func;
+  final bool state;
+  final String text;
+
+  _BoolPledge(this.func, this.state, this.text);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        const SizedBox(
-          child: DrawerHeader(
-            margin: EdgeInsets.all(0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Center(
-              child: Text(
-                'My Pledges',
-                textScaleFactor: 1.25,
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
+        Container(
+          height: MediaQuery.of(context).size.height * .4,
+          padding: _pagePadding,
+          child: Text(
+            text,
+            textAlign: TextAlign.justify,
+            textScaleFactor: 1.75,
           ),
         ),
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 20,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.fastfood),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  0,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 0
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 0
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.directions_car),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  1,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 1
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 1
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.airplanemode_active),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  2,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 2
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 2
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.local_car_wash),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(3,
-                    duration: _pageAnimDuration, curve: _pageCurve),
-              ),
-              color: _currentPageIndex == 3
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 3
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.restaurant),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  4,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 4
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 4
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  5,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 5
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 5
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.restore_from_trash),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  6,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 6
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 6
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.ac_unit),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  7,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 7
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 7
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.developer_board),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  8,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 8
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 8
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-            IconButton(
-              icon: const Icon(Icons.battery_charging_full),
-              onPressed: () => setState(
-                () => _pageController.animateToPage(
-                  9,
-                  duration: _pageAnimDuration,
-                  curve: _pageCurve,
-                ),
-              ),
-              color: _currentPageIndex == 9
-                  ? _activePageIconColor
-                  : _inactivePageIconColor,
-              iconSize: _currentPageIndex == 9
-                  ? _activePageIconSize
-                  : _inactivePageIconSize,
-            ),
-          ],
-        ),
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            onPageChanged: (int newPageIndex) =>
-                setState(() => _currentPageIndex = newPageIndex),
+        Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 100),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  const Padding(
-                    padding: _pagePadding,
-                    child: Text(
-                      'I Will Buy Products That Are Sourced Locally And Not Become A Mindless Consumer Of Cheaply Made Products Imported From Distant Nations.',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('No'),
-                        SizedBox(
-                          width: 100,
-                          child: Switch(
-                            value: _localBuyState,
-                            onChanged: (bool val) =>
-                                setState(() => _localBuyState = val),
-                          ),
-                        ),
-                        const Text('Yes'),
-                      ],
-                    ),
-                  ),
-                ],
+              const Text('No'),
+              SizedBox(
+                width: 150,
+                height: 50,
+                child: Switch(
+                  value: state,
+                  onChanged: func,
+                ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const <Widget>[
-                  Text('I Drive My Car For'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text('KMs Weekly And I Will Reduce My Car Usage To'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text('KMs Per Week.'),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const <Widget>[
-                  Text('I Fly For A Total Of'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text(
-                      'Hours Annually And I Want To Reduce My Flying Hours To'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text('Hours.'),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const <Widget>[
-                  Text('I  Carpool For A Total Of'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text(
-                      'KMs Every Week And I Will Increase My Carpool For A Total Of'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text('KMs Every Week.'),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const <Widget>[
-                  Text('I Eat'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text(
-                      'Non-vegetarian Meals Every Week And I Want To Reduce To'),
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: '0',
-                      ),
-                    ),
-                    width: 100,
-                  ),
-                  Text('Meals.'),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  const Padding(
-                    padding: _pagePadding,
-                    child: Text(
-                      'I Will Source My Food From Local Sources As Much As Possible.',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('No'),
-                        SizedBox(
-                          width: 100,
-                          child: Switch(
-                            value: _localBuyState,
-                            onChanged: (bool val) =>
-                                setState(() => _localBuyState = val),
-                          ),
-                        ),
-                        const Text('Yes'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  const Padding(
-                    padding: _pagePadding,
-                    child: Text(
-                      'I Want To Reduce My Food Waste As Much As Possible And Want To Compost Whatever I Waste.',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('No'),
-                        SizedBox(
-                          width: 100,
-                          child: Switch(
-                            value: _localBuyState,
-                            onChanged: (bool val) =>
-                                setState(() => _localBuyState = val),
-                          ),
-                        ),
-                        const Text('Yes'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  const Padding(
-                    padding: _pagePadding,
-                    child: Text(
-                      'I Will Set My Heating Temperatures At 18C And My AC Temperature At 24C.',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('No'),
-                        SizedBox(
-                          width: 100,
-                          child: Switch(
-                            value: _localBuyState,
-                            onChanged: (bool val) =>
-                                setState(() => _localBuyState = val),
-                          ),
-                        ),
-                        const Text('Yes'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  const Padding(
-                    padding: _pagePadding,
-                    child: Text(
-                      'I Want To Stop Using A Dryer And Hang-dry My Clothes.',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('No'),
-                        SizedBox(
-                          width: 100,
-                          child: Switch(
-                            value: _localBuyState,
-                            onChanged: (bool val) =>
-                                setState(() => _localBuyState = val),
-                          ),
-                        ),
-                        const Text('Yes'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  const Padding(
-                    padding: _pagePadding,
-                    child: Text(
-                      'I Will Move To Green Energy For My Household Use, As Much As Possible (Solar & Other Renewable Energy Sources).',
-                      textScaleFactor: 2,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('No'),
-                        SizedBox(
-                          width: 100,
-                          child: Switch(
-                            value: _localBuyState,
-                            onChanged: (bool val) =>
-                                setState(() => _localBuyState = val),
-                          ),
-                        ),
-                        const Text('Yes'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              const Text('Yes'),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ValPledge extends StatelessWidget {
+  final String text1, text2, text3;
+
+  _ValPledge(this.text1, this.text2, this.text3);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          SizedBox(height: 10),
+          Text(
+            text1,
+            textScaleFactor: 1.5,
+          ),
+          const SizedBox(
+            child: TextField(
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                  hintText: '0',
+                  hintStyle:
+                      TextStyle(fontWeight: FontWeight.w800, fontSize: 22)),
+            ),
+            width: 100,
+          ),
+          Text(
+            text2,
+            textScaleFactor: 1.5,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            child: TextField(
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                  hintText: '0',
+                  hintStyle:
+                      TextStyle(fontWeight: FontWeight.w800, fontSize: 22)),
+            ),
+            width: 100,
+          ),
+          Text(
+            text3,
+            textScaleFactor: 1.5,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 75,
+          )
+        ],
+      ),
     );
   }
 }

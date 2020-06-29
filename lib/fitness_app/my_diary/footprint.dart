@@ -9,9 +9,9 @@ class Footprint extends StatefulWidget {
   _Footprint createState() => _Footprint();
 }
 
-class _Footprint extends State<Footprint>
-    with TickerProviderStateMixin {
+class _Footprint extends State<Footprint> with TickerProviderStateMixin {
   Animation<double> topBarAnimation;
+  bool _isloading = true;
 
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
@@ -20,11 +20,22 @@ class _Footprint extends State<Footprint>
     return MaterialApp(
       title: 'welcome',
       home: Scaffold(
-       body: WebView(
-         initialUrl: "https://www.footprintcalculator.org/food1",
-         javascriptMode: JavascriptMode.unrestricted,
-       ),
+        body: Stack(
+          children: [
+            WebView(
+              initialUrl: "https://www.footprintcalculator.org/food1",
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageFinished: (String done) =>
+                  setState(() => _isloading = false),
+            ),
+            _isloading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Container()
+          ],
+        ),
       ),
     );
-   }
+  }
 }
